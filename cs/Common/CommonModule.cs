@@ -7,6 +7,7 @@ namespace Common
         protected override void Load(ContainerBuilder builder)
         {
             base.Load(builder);
+            builder.RegisterType<ConsoleWriter>().AsImplementedInterfaces();
         }
     }
 }

@@ -1,8 +1,13 @@
 ﻿using System;
+using Common;
 
 namespace Implementation
 {
-    public class BonAppetit
+    public class BonAppetit : ISolveable
     {
+        public void Solve()
+        {
+            
+        }
     }
 }

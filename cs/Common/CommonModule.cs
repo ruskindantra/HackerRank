@@ -8,6 +8,7 @@ namespace Common
         {
             base.Load(builder);
             builder.RegisterType<ConsoleWriter>().AsImplementedInterfaces();
+            builder.RegisterType<ConsoleReader>().AsImplementedInterfaces();
         }
     }
 }

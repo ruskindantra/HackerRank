@@ -2,6 +2,7 @@
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common;
+using Implementation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -56,6 +57,7 @@ namespace Runner
                 .ConfigureContainer<ContainerBuilder>(containerBuilder =>
                 {
                     containerBuilder.RegisterModule<CommonModule>();
+                    containerBuilder.RegisterModule<ImplementationModule>();
                 })
                 .UseConsoleLifetime();
 

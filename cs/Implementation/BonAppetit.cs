@@ -40,11 +40,4 @@ namespace Implementation
             }
         }
     }
-
-    public enum Keys
-    {
-        None,
-        BonAppetit,
-        SockMerchant
-    }
 }

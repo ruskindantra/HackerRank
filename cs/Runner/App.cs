@@ -28,7 +28,7 @@ namespace Runner
 
         public Task StartAsync(CancellationToken cancellationToken)
         {
-            var solution = _solutions[Keys.SockMerchant];
+            var solution = _solutions[Keys.ClimbingTheLeaderboard];
             solution.Solve();
             return Task.CompletedTask;
         }

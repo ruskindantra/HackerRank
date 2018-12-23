@@ -36,103 +36,23 @@ namespace Implementation
         private int[] Solve(int[] scores, int[] alice)
         {
             var ranks = new int[alice.Length];
-            
-//            var scoresList = scores.ToList();
-//            scoresList.AddRange(alice);
-//
-//            scores = scoresList.ToArray();
-//            
-//            var dictionaryScores = new Dictionary<int, int>();
-//            foreach (var score in scores)
-//            {
-//                if (!dictionaryScores.ContainsKey(score))
-//                {
-//                    dictionaryScores.Add(score, 0);
-//                }
-//                dictionaryScores[score]++;
-//            }
-//
-//            for (var i = 0; i < alice.Length; i++)
-//            {
-//                var alicesScore = alice[i];
-//                var scoresGreaterThanAlice = dictionaryScores.Count(d => d.Key > alicesScore);
-//                var scoresMatchingAlice = dictionaryScores[alicesScore];
-//
-//                ranks[i] = scoresGreaterThanAlice + scoresMatchingAlice;
-//            }
-            
-
-//            var distinctScores = scores.Distinct();
-//
-//            for (var i = 0; i < alice.Length; i++)
-//            {
-//                var alicesScore = alice[i];
-//                var scoresGreaterThanAlice = distinctScores.Where(d => d >= alicesScore);
-//                
-//                //check if alice's scores match and how many
-//                var matchedScores = scores.Count(d => d == alicesScore);
-//                if (matchedScores > 0)
-//                {
-//                    ranks[i] = scoresGreaterThanAlice.Count();
-//                }
-//                else
-//                {
-//                    ranks[i] = (scoresGreaterThanAlice.Count() + 1);
-//                }
-//            }
-
-            int rankIndex = alice.Length - 1;
-            int rank = 1;
-            int startIndex = -1;
-
-            bool scoreLeftOver = false;
-            int? lastScoreChecked = null;
-            for (int i = alice.Length - 1; i >= 0; i--)
+             
+            var dictionaryScores = new Dictionary<int, int>(scores.Length);
+            foreach (var score in scores)
             {
-                scoreLeftOver = false;
-                
-                var aliceScore = alice[i];
-
-                do
+                if (!dictionaryScores.ContainsKey(score))
                 {
-                    startIndex++;
-
-                    if (startIndex >= scores.Length)
-                    {
-                        scoreLeftOver = true;
-                        break;
-                    }
-                    
-                    var score = scores[startIndex];
-
-                    if (score == lastScoreChecked)
-                    {
-                        continue;
-                    }
-                    else
-                    {
-                        lastScoreChecked = score;
-                    }
-                    
-                    if (aliceScore < score)
-                    {    
-                        rank++;
-                        scoreLeftOver = true;
-                        continue;
-                    }
-
-                    if (aliceScore >= score)
-                    {
-                        ranks[rankIndex--] = rank++;
-                        break;
-                    }
-
-                } while (startIndex < scores.Length - 1);
+                    dictionaryScores.Add(score, 0);
+                }
+                dictionaryScores[score]++;
             }
 
-            if (scoreLeftOver)
+            for (var i = 0; i < alice.Length; i++)
             {
-                ranks[rankIndex] = rank;
+                var alicesScore = alice[i];
+                var scoresGreaterThanAlice = dictionaryScores.Count(d => d.Key > alicesScore);
+
+                ranks[i] = scoresGreaterThanAlice + 1;
             }
 
             return ranks;

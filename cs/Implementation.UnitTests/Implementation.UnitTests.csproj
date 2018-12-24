@@ -16,4 +16,12 @@
   <ItemGroup>
     <ProjectReference Include="..\Implementation\Implementation.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <None Update="TestFiles\climbing_the_leaderboard_1_input.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Update="TestFiles\climbing_the_leaderboard_1_output.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

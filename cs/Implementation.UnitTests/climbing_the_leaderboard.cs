@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
+using System.Linq;
 using Xunit;
 using AutoFixture;
 using Common;
@@ -20,6 +22,9 @@ namespace Implementation.UnitTests
         [Theory]
         [InlineData("7", "4", "100 100 50 40 40 20 10", "5 25 50 120", new[] {"6", "4", "2", "1"})]
         [InlineData("6", "5", "100 90 90 80 75 60", "50 65 77 90 102", new[] {"6", "5", "4", "2", "1"})]
+        [InlineData("6", "6", "100 90 90 80 75 60", "50 65 77 90 102 102", new[] {"6", "5", "4", "2", "1", "1"})]
+        [InlineData("6", "6", "100 90 90 80 75 60", "50 50 65 77 90 102", new[] {"6", "6", "5", "4", "2", "1"})]
+        [InlineData("6", "6", "100 90 90 80 75 60", "50 65 77 77 90 102", new[] {"6", "5", "4", "4", "2", "1"})]
         public void sample_test_cases(string m, string n, string scores, string alice, string[] expected)
         {
             var fixture = new Fixture();
@@ -71,6 +76,41 @@ namespace Implementation.UnitTests
             sut.Solve();
             
             actualOutput.Should().BeEquivalentTo(new[] {"6", "5", "4", "4", "3"}).And.BeInDescendingOrder();            
+        }
+
+        [Fact]
+        public void test_case_9()
+        {
+            var fixture = new Fixture();
+            fixture.Customize(new AutoFixture.AutoMoq.AutoMoqCustomization());
+
+            var actualOutput = new List<string>();
+
+            var inputReaderMock = _mockRepository.Create<IInputReader>();
+            var outputWriterMock = _mockRepository.Create<IOutputWriter>();
+
+            var lines = File.ReadAllLines(@"TestFiles/climbing_the_leaderboard_1_input.txt");
+            var expectedOutput = File.ReadAllLines(@"TestFiles/climbing_the_leaderboard_1_output.txt");
+            
+            int index = 0;
+            inputReaderMock.SetupSequence(i => i.ReadLine())
+                .Returns(lines[index++])
+                .Returns(lines[index++])
+                .Returns(lines[index++])
+                .Returns(lines[index++]);
+            outputWriterMock.Setup(o => o.WriteLine(It.IsAny<string>())).Callback<string>(s => actualOutput.Add(s));
+            
+            fixture.Inject(inputReaderMock);
+            fixture.Inject(outputWriterMock);
+            
+            var sut = fixture.Create<ClimbingTheLeaderboard>();
+            sut.Solve();
+
+            actualOutput.Count.Should().Be(expectedOutput.Length);
+            
+            File.WriteAllLines("output.txt", actualOutput);
+            
+            //actualOutput.Should().BeEquivalentTo(expectedOutput).And.BeInDescendingOrder(); 
         }
     }
 }

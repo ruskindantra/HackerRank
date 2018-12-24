@@ -36,23 +36,24 @@ namespace Implementation
         private int[] Solve(int[] scores, int[] alice)
         {
             var ranks = new int[alice.Length];
-             
-            var dictionaryScores = new Dictionary<int, int>(scores.Length);
-            foreach (var score in scores)
+            int[] array = scores.Distinct().ToArray();
+            int rankIndex = 0;
+            int i = array.Length - 1;
+            foreach(int score in alice) 
             {
-                if (!dictionaryScores.ContainsKey(score))
+                while(i >= 0) 
                 {
-                    dictionaryScores.Add(score, 0);
+                    if(score >= array[i]) 
+                        i--;
+                    else
+                    {
+                        ranks[rankIndex++] = i + 2;
+                        break;
+                    }
                 }
-                dictionaryScores[score]++;
-            }
 
-            for (var i = 0; i < alice.Length; i++)
-            {
-                var alicesScore = alice[i];
-                var scoresGreaterThanAlice = dictionaryScores.Count(d => d.Key > alicesScore);
-
-                ranks[i] = scoresGreaterThanAlice + 1;
+                if (i < 0)
+                    ranks[rankIndex++] = 1;
             }
 
             return ranks;

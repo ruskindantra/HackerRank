@@ -5,6 +5,7 @@
         None,
         BonAppetit,
         SockMerchant,
-        ClimbingTheLeaderboard
+        ClimbingTheLeaderboard,
+        DrawingBook
     }
 }

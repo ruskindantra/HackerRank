@@ -10,6 +10,7 @@ namespace Implementation
             builder.RegisterType<BonAppetit>().Keyed<ISolveable>(Keys.BonAppetit);
             builder.RegisterType<SockMerchant>().Keyed<ISolveable>(Keys.SockMerchant);
             builder.RegisterType<ClimbingTheLeaderboard>().Keyed<ISolveable>(Keys.ClimbingTheLeaderboard);
+            builder.RegisterType<DrawingBook>().Keyed<ISolveable>(Keys.DrawingBook);
         }
     }
 }

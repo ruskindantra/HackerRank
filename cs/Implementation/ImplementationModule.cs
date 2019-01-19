@@ -11,6 +11,7 @@ namespace Implementation
             builder.RegisterType<SockMerchant>().Keyed<ISolveable>(Keys.SockMerchant);
             builder.RegisterType<ClimbingTheLeaderboard>().Keyed<ISolveable>(Keys.ClimbingTheLeaderboard);
             builder.RegisterType<DrawingBook>().Keyed<ISolveable>(Keys.DrawingBook);
+            builder.RegisterType<CountingValleys>().Keyed<ISolveable>(Keys.CountingValleys);
         }
     }
 }

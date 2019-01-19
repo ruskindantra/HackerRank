@@ -6,6 +6,7 @@
         BonAppetit,
         SockMerchant,
         ClimbingTheLeaderboard,
-        DrawingBook
+        DrawingBook,
+        CountingValleys
     }
 }

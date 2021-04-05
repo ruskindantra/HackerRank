@@ -2,6 +2,23 @@ using Common;
 
 namespace Implementation
 {
+    internal class DynamicArray : ISolveable
+    {
+        private readonly IOutputWriter _outputWriter;
+        private readonly IInputReader _inputReader;
+
+        public DynamicArray(IOutputWriter outputWriter, IInputReader inputReader)
+        {
+            _outputWriter = outputWriter;
+            _inputReader = inputReader;
+        }
+
+        public void Solve()
+        {
+            throw new System.NotImplementedException();
+        }
+    }
+    
     internal class CountingValleys : ISolveable
     {
         private readonly IOutputWriter _outputWriter;
